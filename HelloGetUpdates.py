@@ -1,16 +1,30 @@
 import requests
+import os
 #expcount 
-token = ""
-baseUrl = "https://api.telegram.org/bot" + token + "/"
+
 
 
 
 def get_updates():
+    token = (os.environ.get('TG_TOKEN', None))
+    print("token = ",  token)
+    tokenStr = str(token)
+    #if token is None:
+        #return
+    baseUrl = "https://api.telegram.org/bot" + tokenStr + "/"
+    print("baseUrl = ",  baseUrl)
     authUrl = baseUrl + "getMe"
     authUrl = "https://api.telegram.org/"
-    responce = requests.get(authUrl)
-    print(responce)
+    try:
+        responce = requests.get(authUrl)
+        print(responce)
+    except  Exception as e:
+        print(str(e))
+        return
     
-
-get_updates()
+    
+if __name__ == "__main__":
+    
+    get_updates()
+    
     
